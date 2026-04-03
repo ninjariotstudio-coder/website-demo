@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Demo Template</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --panel-2: #1e232d;
+      --text: #f4f7fb;
+      --muted: #b7c0cf;
+      --accent: #d62828;
+      --accent-hover: #ef4444;
+      --line: rgba(255,255,255,0.08);
+      --shadow: 0 20px 40px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(214,40,40,0.16), transparent 30%),
+        linear-gradient(180deg, #0b0d11 0%, #12161d 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(var(--max), calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(11,13,17,0.78);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 0.45rem 0.8rem;
+      border: 1px solid rgba(214,40,40,0.35);
+      border-radius: 999px;
+      background: rgba(214,40,40,0.1);
+      color: #ffd6d6;
+      font-size: 0.86rem;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 4.6rem);
+      line-height: 1.05;
+      margin: 0 0 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.06rem;
+      max-width: 640px;
+      margin: 0 0 1.4rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .placeholder-box {
+      min-height: 280px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,0.18);
+      background: linear-gradient(135deg, rgba(214,40,40,0.12), rgba(255,255,255,0.03));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 1.5rem;
+      color: #d9e2ef;
+      font-weight: 700;
+      font-size: 1.35rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.2rem;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border-color: var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.06);
+    }
+
+    section {
+      padding: 1.5rem 0 4rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 0.5rem;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin: 0 0 1.5rem;
+      max-width: 700px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.65rem;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about-wrap,
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 0;
+    }
+
+    .checklist li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .quote {
+      font-size: 1.05rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .quote-by {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 0.9rem;
+      margin-top: 1rem;
+    }
+
+    .contact-item {
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel-2);
+      color: var(--muted);
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.2rem 0 2rem;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .grid-3,
+      .about-wrap,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">YOUR<span>BUSINESS</span>.com</div>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Simple demo website template</div>
+          <h1>This is <br />your company name.</h1>
+          <p>
+            Replace this text with your business message. This section is made to show potential clients
+            how their company could look with a clean, modern, mobile-friendly website.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Get a Free Quote</a>
+            <a class="btn btn-secondary" href="#services">View Services</a>
+            <div class="actions">
+            <a class="btn btn-primary" href="tel:9183253125">
+              📞 Call Now
+            </a>
+            <span style="align-self:center; color:#b7c0cf;">
+               or call (918) 325-3125
+           </span>
+          </div>
+          </div>
+          </div>
+
+        <div class="hero-card">
+          <h3>Demo Preview Area</h3>
+          <div class="placeholder-box">
+            Add a logo, business photo,<br />or screenshot here
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <h2 class="section-title">Services</h2>
+        <p class="section-sub">
+          These cards are placeholders you can swap out for any business type like roofing, lawn care,
+          barber shop, auto repair, construction, cleaning, or legal services.
+        </p>
+        <div class="grid-3">
+          <article class="card">
+            <h3>Service One</h3>
+            <p>Use this area to explain one main service the business offers in a clear and simple way.</p>
+          </article>
+          <article class="card">
+            <h3>Service Two</h3>
+            <p>Keep it short, easy to scan, and focused on what the customer actually needs.</p>
+          </article>
+          <article class="card">
+            <h3>Service Three</h3>
+            <p>Good websites make it easy for visitors to understand the offer fast and take action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-wrap">
+        <div class="card">
+          <h2 class="section-title">About the Business</h2>
+          <p>
+            Put a short story here about the company. For example: family-owned, proudly serving the
+            local area, focused on quality work, honest communication, and dependable service.
+          </p>
+          <ul class="checklist">
+            <li>Locally owned and operated</li>
+            <li>Clean and professional service</li>
+            <li>Fast response and simple communication</li>
+            <li>Built to help customers trust you</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2 class="section-title">Why This Works</h2>
+          <p>
+            This layout is designed to feel believable, modern, and easy to customize. It gives you a
+            solid demo piece to show potential clients what their business could look like online.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <h2 class="section-title">Customer Reviews</h2>
+        <p class="section-sub">These are sample placeholders. Swap them with real reviews later if needed.</p>
+        <div class="grid-3">
+          <article class="card">
+            <div class="quote">“Fast, friendly, and professional from start to finish.”</div>
+            <div class="quote-by">— Happy Customer</div>
+          </article>
+          <article class="card">
+            <div class="quote">“Great communication and the work was done right.”</div>
+            <div class="quote-by">— Local Client</div>
+          </article>
+          <article class="card">
+            <div class="quote">“Would absolutely recommend this business to others.”</div>
+            <div class="quote-by">— Repeat Customer</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-wrap">
+        <div class="card">
+          <h2 class="section-title">Contact</h2>
+          <p>
+            This section is where the business phone number, email, service area, or a form would go.
+            Keeping contact info easy to find helps turn visitors into real leads.
+          </p>
+          <div class="contact-list">
+            <div class="contact-item">Phone: (555) 123-4567</div>
+            <div class="contact-item">Email: yourname@yourbusiness.com</div>
+            <div class="contact-item">Location: Your City, State</div>
+          </div>
+        </div>
+        <div class="card">
+          <h2 class="section-title">Use This as a Showcase</h2>
+          <p>
+            When reaching out to clients, you can send this as a live example and say: “Here’s a simple
+            demo of the kind of clean, modern website I could build for your business.”
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#">Start Your Project</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Demo template for portfolio use • Built to help showcase simple business website design.
+    </div>
+  </footer>
+</body>
+</html>
